@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+
+            <p id="x1"> </p>
+
+            <form>
+                <input type="text" id="input">
+                <button id="submitButton" class="btn btn-primary">Submit</button>
+
+                <button id="First" class="btn btn-success">Remove First</button>
+
+                <button id="Last" class="btn btn-danger">Remove Last</button>
+            </form>
+
+
+        </div>
+        <script>
+            let mydivtext = document.getElementById("x1");
+
+            let people = ["Joachim", "John", "Jesper", "Mads"];
+
+            function makeList() {
+
+                let text = people.map(person => "<li>" + person + "</li>");
+
+                text.unshift("<ul>");
+                text.push("</ul>");
+
+                mydivtext.innerHTML = text.join("");
+            }
+            makeList();
+
+            function insertPerson(e) {
+                e.preventDefault();
+                let newPerson = document.getElementById("input").value;
+                people.push(newPerson);
+                makeList();
+            }
+
+            var btn = document.getElementById("submitButton");
+
+            btn.addEventListener("click", function (e) {
+                insertPerson(e);
+            });
+            function removeFirst(e) {
+                e.preventDefault();
+                people.shift();
+                makeList();
+            }
+
+            document.getElementById("First").addEventListener("click", function (e) {
+                removeFirst(e);
+            });
+
+            function removeLast(e) {
+                e.preventDefault();
+                people.pop();
+                makeList();
+            }
+            document.getElementById("Last").addEventListener("click", function (e) {
+                removeLast(e);
+            });
+        </script>
+    </body>
+</html>

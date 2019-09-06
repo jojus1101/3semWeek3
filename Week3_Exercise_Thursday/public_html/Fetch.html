@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <div class="container">
+
+        <input type="number" id="personId">
+        <button id="FindByID" class="btn-primary">Get User</button>
+        <button id="GetAll" class="btn-primary">Get all</button>
+
+        <pre id="printPerson">
+                
+        </pre>
+
+    </div>
+    <script>
+        let FindByID = document.getElementById("FindByID");
+
+        let printPerson = document.getElementById("printPerson");
+
+// JSON function
+        function getPerson(obj) {
+            return JSON.stringify(obj, null, 3);
+        }
+
+// Get by ID
+        FindByID.addEventListener("click", function () {
+            let personId = document.getElementById("personId").value;
+            let url = "https://jsonplaceholder.typicode.com/users/" + personId;
+            fetch(url)
+                    .then(res => res.json()) //in flow1, just do it
+                    .then(data => {
+                        // Inside this callback, and only here, the response data is available
+                        printPerson.innerHTML = getPerson(data);
+                    });
+        });
+
+    </script>
+
+
+
+</body>
+</html>
